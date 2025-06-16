@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinerotech</title>
+  <style>
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 1s ease-out 2s forwards;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    .loader-text {
+      font-size: 2rem;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+    .main-content {
+      display: none;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+    <style>
+      #splash {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-size: 2rem;
+        font-weight: bold;
+        animation: fadeOut 3s ease-in-out forwards;
+      }
+
+      @keyframes fadeOut {
+        0% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; visibility: hidden; }
+      }
+    </style>
+
+    <div id="splash">Dinerotech</div>
+<audio id="splashSound" autoplay>
+  <source src="https://www.soundjay.com/mechanical/sounds/mechanical-robotic-01.mp3" type="audio/mpeg">
+</audio>
+<script>
+  document.getElementById("splashSound").play().catch(() => {});
+</script>
+
+
+    <script>
+      setTimeout(function() {
+        window.location.href = 'login.html';
+      }, 3500);
+    </script>
+    
+    <nav style="text-align:center; margin: 1rem;">
+      <a href="services.html" style="padding: 0.75rem 1.5rem; background:#2ecc71; color:white; text-decoration:none; border-radius:5px;">
+        View Our Services
+      </a>
+    </nav>
+    
+  <div id="preloader">
+    <div class="loader-text">DINEROTECH</div>
+    <div style="margin-top:10px; font-size: 1rem;">Loading...</div>
+  </div>
+  <div class="main-content" id="mainContent">
+    <h1>Welcome to Dinerotech</h1>
+    <p>Your trusted partner in tech innovation.</p>
+  </div>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+      }, 2000);
+    });
+  </script>
+
+    <button id="skipBtn" style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #27ae60;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      z-index: 10000;
+      cursor: pointer;
+    ">Skip Login</button>
+
+    <script>
+      document.getElementById("skipBtn").addEventListener("click", function() {
+        window.location.href = 'services.html';
+      });
+    </script>
+    
+</body>
+</html>

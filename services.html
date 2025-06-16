@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dinerotech Services</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .service {
+      background: white;
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 700px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .service img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .service-details {
+      flex: 1;
+    }
+    .service h2 {
+      margin: 0 0 0.5rem 0;
+      color: #27ae60;
+    }
+    .service p {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Services</h1>
+  <div id="services"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDGq18imAa0eyQ1gf1QRj1y72gIBEyHxmU",
+      authDomain: "web-me-6d95e.firebaseapp.com",
+      projectId: "web-me-6d95e",
+      storageBucket: "web-me-6d95e.firebasestorage.app",
+      appId: "1:25780290064:android:1f4a5229b0f29a2f1c0095"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const serviceImages = {
+      "AI Chatbot Integration": "https://cdn-icons-png.flaticon.com/512/4712/4712104.png",
+      "Custom API Development": "https://cdn-icons-png.flaticon.com/512/2099/2099079.png",
+      "Tech Support Consulting": "https://cdn-icons-png.flaticon.com/512/1048/1048949.png",
+      "Machine Learning Models": "https://cdn-icons-png.flaticon.com/512/4149/4149643.png",
+      "Automation Services": "https://cdn-icons-png.flaticon.com/512/3063/3063826.png",
+      "Website & App Launch": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "Graphics & Photoshop Services": "https://cdn-icons-png.flaticon.com/512/3063/3063346.png",
+      "IoT & Robotics Configurations": "https://cdn-icons-png.flaticon.com/512/10724/10724538.png"
+    };
+
+    async function loadServices() {
+      const container = document.getElementById("services");
+      const snapshot = await db.collection("services").orderBy("createdAt", "desc").get();
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const imgSrc = serviceImages[data.title] || "https://cdn-icons-png.flaticon.com/512/3039/3039439.png";
+        const div = document.createElement("div");
+        div.className = "service";
+        div.innerHTML = `
+          <img src="${imgSrc}" alt="icon">
+          <div class="service-details">
+            <h2>${data.title}</h2>
+            <p>${data.description}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    loadServices();
+  </script>
+</body>
+</html>
